@@ -14,4 +14,4 @@
         android:gravity="center"
         android:text="Test" />
 
-    </LinearLayout>
+</LinearLayout>

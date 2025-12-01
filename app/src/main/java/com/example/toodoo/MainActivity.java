@@ -1,6 +1,7 @@
 package com.example.toodoo;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,10 +31,22 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         GroupDatabase db = Room.databaseBuilder(getApplicationContext(), GroupDatabase.class, "groupDatabase").build();
-
+        List<TaskGroup> groups = db.groupDAO().getGroups();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(new GroupsAdapter(groups));
+        registerForContextMenu(recyclerView);
+
+
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
 }
 
