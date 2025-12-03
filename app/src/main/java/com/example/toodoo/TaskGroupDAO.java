@@ -1,13 +1,15 @@
 package com.example.toodoo;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
+import androidx.lifecycle.LiveData;
 import java.util.List;
 
+@Dao
 public interface TaskGroupDAO {
     @Insert
     void insertGroup(TaskGroup group);
@@ -22,5 +24,5 @@ public interface TaskGroupDAO {
     TaskGroup getGroup(String groupName);
 
     @Query("Select * from TaskGroup")
-    List<TaskGroup> getGroups();
+    LiveData<List<TaskGroup>> getGroups();
 }

@@ -14,21 +14,14 @@ import java.util.List;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder>
 {
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
         public TextView groupName;
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             groupName = itemView.findViewById(R.id.groupName);
-            itemView.setOnCreateContextMenuListener(this);
         }
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-        {
-
-        }
-
     }
     public List<TaskGroup> groups;
     public int clickedPosition;
@@ -49,7 +42,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         TaskGroup cur = groups.get(position);
         holder.groupName.setText(cur.groupName);
         holder.itemView.setOnLongClickListener(v -> {
-            this.clickedPosition = holder.getAdapterPosition();
+            this.clickedPosition = holder.getBindingAdapterPosition();
             return false;
         });
     }
@@ -57,5 +50,16 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
     public int getItemCount()
     {
         return groups != null ? groups.size() : 0;
+    }
+
+    public TaskGroup getLongClickedGroup()
+    {
+       return groups.get(clickedPosition);
+    }
+
+    public void updateGroups(List<TaskGroup> newGroups)
+    {
+        this.groups = newGroups;
+        notifyDataSetChanged();
     }
 }

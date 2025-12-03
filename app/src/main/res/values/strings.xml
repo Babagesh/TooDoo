@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TooDoo</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>

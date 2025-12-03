@@ -9,13 +9,11 @@ import java.util.List;
 @Entity
 public class TaskGroup
 {
-    @PrimaryKey(autoGenerate=false)
+    @PrimaryKey(autoGenerate=true)
+    public long groupId;
     public String groupName;
-
-    public List<Goal> goals = new ArrayList<Goal>();
     public TaskGroup(String groupName)
     {
-
         this.groupName = groupName;
     }
 }
