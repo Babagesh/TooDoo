@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Goal Name Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goal Name"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/goalNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="What is your goal!"
+            android:inputType="textCapSentences" />
+
+        <!-- Goal Description Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Description"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/goalDescriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g., Finish the course on Room DB"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <!-- Priority Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Priority"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/goalPriorityInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="5 (High) to 1 (Low)"
+            android:inputType="number" />
+
+        <!-- To-Do List Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Task List"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/goalTaskListInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="Input your to-do items!"
+            android:inputType="textMultiLine"
+            android:minHeight="100dp" />
+
+        <!-- Button Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center"> <!-- Aligns buttons to the right -->
+
+            <!-- AI Generate Button -->
+            <Button
+                android:id="@+id/aiGenerateButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AI Generate To Do List"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Create Goal Button -->
+            <Button
+                android:id="@+id/createGoalButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

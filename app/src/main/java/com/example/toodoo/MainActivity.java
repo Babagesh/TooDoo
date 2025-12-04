@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements OnGroupClickListe
         recyclerView = findViewById(R.id.goalsView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(gridLayoutManager);
-        groupsAdapter = new GroupsAdapter(new ArrayList<>());
+        groupsAdapter = new GroupsAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(groupsAdapter);
         registerForContextMenu(recyclerView);
 
-        db = Room.databaseBuilder(getApplicationContext(), GroupDatabase.class, "groupDatabase").build();
+        db = Room.databaseBuilder(getApplicationContext(), GroupDatabase.class, "groupDatabase").fallbackToDestructiveMigration().allowMainThreadQueries().build();
         LiveData<List<TaskGroup>> groups = db.groupDAO().getGroups();
         groups.observe(this, new Observer<List<TaskGroup>>() {
             @Override

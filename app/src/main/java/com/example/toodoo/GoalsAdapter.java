@@ -21,13 +21,16 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.ViewHolder>
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
+            this.goalName = itemView.findViewById(R.id.goalName);
+            this.priority = itemView.findViewById(R.id.priority);
         }
     }
     public List<Goal> goals;
-    public int clickedPosition;
-    public GoalsAdapter(List<Goal> goalsList)
+    public OnGoalClickListener onGoalClickListener;
+    public GoalsAdapter(List<Goal> goalsList, OnGoalClickListener onGoalClickListener)
     {
         goals = goalsList;
+        this.onGoalClickListener = onGoalClickListener;
     }
     @Override
     @NonNull
@@ -41,7 +44,10 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.ViewHolder>
     {
         Goal cur = goals.get(position);
         holder.goalName.setText(cur.goalName);
-        holder.priority.setText(cur.priority);
+        holder.priority.setText(String.valueOf(cur.priority));
+        holder.itemView.setOnClickListener(v -> {
+            onGoalClickListener.onGoalClick(cur);
+        });
     }
     @Override
     public int getItemCount()
@@ -49,10 +55,6 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.ViewHolder>
         return goals != null ? goals.size() : 0;
     }
 
-    public Goal getLongClickedGoal()
-    {
-        return goals.get(clickedPosition);
-    }
 
     public void updateGoals(List<Goal> newGoals)
     {

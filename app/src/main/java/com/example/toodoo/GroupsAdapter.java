@@ -25,9 +25,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
     public List<TaskGroup> groups;
     public int clickedPosition;
     public OnGroupClickListener onGroupClickListener;
-    public GroupsAdapter(List<TaskGroup> groupList)
+    public GroupsAdapter(List<TaskGroup> groupList, OnGroupClickListener onGroupClickListener)
     {
         groups = groupList;
+        this.onGroupClickListener = onGroupClickListener;
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)

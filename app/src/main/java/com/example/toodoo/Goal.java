@@ -16,13 +16,15 @@ public class Goal
     public long goalID;
     public long groupID;
     public String goalName;
+    public String description;
     public String taskList;
     public int priority;
 
-    public Goal(long groupID, String goalName, String taskList, int priority)
+    public Goal(long groupID, String goalName, String description,  String taskList, int priority)
     {
         this.groupID = groupID;
         this.goalName = goalName;
+        this.description = description;
         this.taskList = taskList;
         this.priority = priority;
     }

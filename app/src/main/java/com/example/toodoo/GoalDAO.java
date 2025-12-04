@@ -27,5 +27,8 @@ public interface GoalDAO
     @Query("Select * from Goal")
     LiveData<List<Goal>> getGoals();
 
+    @Query("Select * from Goal where groupID = :groupID")
+    LiveData<List<Goal>> getGoalsByGroup(long groupID);
+
 
 }
