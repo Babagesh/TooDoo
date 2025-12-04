@@ -3,8 +3,6 @@ package com.example.toodoo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class TaskGroup

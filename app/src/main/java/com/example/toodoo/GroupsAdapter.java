@@ -1,13 +1,11 @@
 package com.example.toodoo;
 
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -20,16 +18,17 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            groupName = itemView.findViewById(R.id.groupName);
+            groupName = itemView.findViewById(R.id.goalName);
         }
+
     }
     public List<TaskGroup> groups;
     public int clickedPosition;
+    public OnGroupClickListener onGroupClickListener;
     public GroupsAdapter(List<TaskGroup> groupList)
     {
         groups = groupList;
     }
-    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
@@ -45,7 +44,11 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
             this.clickedPosition = holder.getBindingAdapterPosition();
             return false;
         });
+        holder.itemView.setOnClickListener(v -> {
+            onGroupClickListener.onGroupClick(cur);
+        });
     }
+
     @Override
     public int getItemCount()
     {
@@ -63,3 +66,4 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         notifyDataSetChanged();
     }
 }
+

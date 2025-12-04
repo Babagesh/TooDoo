@@ -1,11 +1,10 @@
 package com.example.toodoo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +13,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.helper.widget.Grid;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -28,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements OnGroupClickListener
 {
     private GroupDatabase db;
     private  GroupsAdapter groupsAdapter;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.goalsView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(gridLayoutManager);
         groupsAdapter = new GroupsAdapter(new ArrayList<>());
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity
                 groupsAdapter.updateGroups(taskGroups);
             }
         });
-        Button createGroup = findViewById(R.id.createGroup);
+        Button createGroup = findViewById(R.id.createGoal);
         createGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +146,15 @@ public class MainActivity extends AppCompatActivity
         Executors.newSingleThreadExecutor().execute(()->{
             db.groupDAO().deleteGroup(group);
         });
+    }
+
+    @Override
+    public void onGroupClick(TaskGroup group)
+    {
+        Intent intent = new Intent(MainActivity.this, GoalsActivity.class);
+        intent.putExtra("groupName", group.groupName);
+        intent.putExtra("groupID", group.groupId);
+        startActivity(intent);
     }
 
 }
